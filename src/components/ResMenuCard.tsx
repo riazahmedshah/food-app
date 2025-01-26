@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { RES_MENU_IMG } from "@/app/utils/links";
-import { Star } from "lucide-react"
-import Image from "next/image";
+"use client"
+import { Minus, PlusIcon } from "lucide-react"
+import { ResMenuItemList } from "./ResMenuItemList";
+import { useState } from "react";
 
 // interface ResMenuProps{
 //     // name:string;
@@ -14,21 +14,18 @@ import Image from "next/image";
 // }
 
 export const ResMenuCard = ({data}:any) => {
+    const[showItems, setShowItems] = useState(false)
+    const handleDiv = () => {
+        setShowItems(!showItems);
+    }
     //console.log("Data: ",data);
     return(
-        <div className="pt-10">
-            <div>
-                <span>{data.card?.card?.title}</span>
-            
-                {/* <div>
-                    <h3>{name}</h3>
-                    <p>{price}</p>
-                    <p className="flex items-center text-sm text-green-900"><Star fill="green" strokeWidth={0}/>{rating}</p>
-                    <p>{description}</p>
-                </div> */}
-                {/* <Image src={RES_MENU_IMG+imageId} alt="menu-image" height={50} width={50}/> */}
-            
+        <div className=" bg-gray-100  py-1 px-2 rounded-lg shadow-md border border-gray-200 mb-2">
+            <div className="flex items-center justify-between mb-1 py-2 px-1 " onClick={handleDiv}>
+                <h1 className="md:text-xl text-lg font-medium md:font-semibold">{data.card?.card?.title} - ({data.card?.card?.itemCards.length})</h1>
+                {showItems !== true ? <PlusIcon/> : <Minus/>}
             </div>
+            {showItems && <ResMenuItemList data={data.card?.card?.itemCards}/>}
         </div>
     )
 }

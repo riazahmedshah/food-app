@@ -6,7 +6,7 @@ export const Appbar = () => {
     return(
         <div className="">
         <div className="shadow-md py-5 fixed inset-x-0 top-0 z-10 bg-gray-50">
-            <div className="max-w-6xl mx-auto flex justify-between items-center px-2">
+            <div className="md:max-w-6xl max-w-2xl  mx-auto flex justify-between items-center px-2">
                 <div className="font-extrabold text-4xl font-mono">
                     Food<span className="font-sans font-extrabold text-2xl text-violet-600">Z&#39;ee</span>
                 </div>

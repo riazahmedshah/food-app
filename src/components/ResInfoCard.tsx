@@ -1,5 +1,3 @@
-
-
 import { Star } from "lucide-react"
 
 
@@ -16,8 +14,8 @@ export const ResInfoCard = ({avgRatingString, city, cuisines, locality, name,} :
     // console.log("Res Data Info: ", location);
 
   return (
-    <div className="">
-        <div className="pb-4 pt-2 border-b border-gray-400">
+    <div className="mb-4">
+        <div className="pb-4 pt-2 border-b border-gray-400 md:mx-0 px-3">
             <div className="flex items-center justify-between">
                 <h2 className="text-3xl">{name}</h2>
                 <p className="bg-violet-700 text-white flex items-center gap-2 p-2 rounded-lg">{avgRatingString} <Star  fill="#ffffff" strokeWidth={0} className="size-4"/> </p>

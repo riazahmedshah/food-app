@@ -22,7 +22,7 @@ const RestaurantMenu =  ({params}:{params:Param}) => {
                 const data = await response.json();
 
                 setResInfo(data?.data?.cards[2]?.card?.card?.info);
-                console.log(data?.data?.cards[2]?.card?.card);
+                //console.log(data?.data?.cards[2]?.card?.card);
                 
                 const resCategory = data?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter((menu:any) => menu?.card?.card?.["@type"] ===    "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
                 
