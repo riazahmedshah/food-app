@@ -9,7 +9,7 @@ export default function RestaurantPageLayout({
     <div>
       <div className="min-h-screen flex flex-col">
         <Appbar/>
-        <main className="max-w-7xl mx-auto">
+        <main className="">
           {children}
         </main>
       </div>
