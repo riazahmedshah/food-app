@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { RES_MENU } from "@/app/utils/links";
+import { ResMenuCard } from "@/components/ResMenuCard";
 import {ResInfoCard} from "@/components/ResInfoCard";
-//import { ResMenuCard } from "@/components/ResMenuCard";
 import * as React from "react"
 
 
@@ -16,24 +16,17 @@ const RestaurantMenu =  ({params}:{params:Param}) => {
     
 
     React.useEffect(() => {
-        console.log(resMenu);
         const getData = async () => {
             try {
                 const response = await fetch(RES_MENU + resId);
                 const data = await response.json();
 
-                const menuApiResponse = 
-                    data.data.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.slice(2)
-                    ?.map((card: { card: { itemCards: any; }; })  => card?.card?.itemCards)
-                    .flat() || [];
+                setResInfo(data?.data?.cards[2]?.card?.card?.info);
+                console.log(data?.data?.cards[2]?.card?.card);
                 
-                const resInfoApi = data.data.cards[2]?.card?.card || {};
-
-                setResMenu(menuApiResponse);
-                setResInfo(resInfoApi);
-
-                //console.log("Restaurant Info: ", resInfoApi);
-                console.log("Restaurant Menu Info: ", menuApiResponse);
+                const resCategory = data?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter((menu:any) => menu?.card?.card?.["@type"] ===    "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
+                
+                setResMenu(resCategory);
             } catch (error) {
                 console.error("Failed to fetch data:", error);
             }
@@ -41,32 +34,24 @@ const RestaurantMenu =  ({params}:{params:Param}) => {
         getData()
     },[resId]);
 
-    // const { name, description, ratings, price,imageId } = menu.itemCards.card.info;
-    // const{ rating } = ratings.aggregatedRating;
 
-    //if(!resMenu || !resInfo) return;
 
     return(
         <div className="mt-32 max-w-4xl mx-auto">
             <div>
-                <ResInfoCard name={resInfo?.info?.name} cuisines={resInfo?.info?.cuisines} locality={resInfo?.info?.locality} city={resInfo?.info?.city} avgRatingString={resInfo?.info?.avgRatingString}/>
+                <ResInfoCard name={resInfo.name} cuisines={resInfo.cuisines} locality={resInfo.locality} city={resInfo.city} avgRatingString={resInfo.avgRatingString}/>
             </div>
 
             {/* Menu Items */}
-            {/* <div>
-                {resMenu.map((menu: any, idx: number) => (
-                    <div key={idx}>
-                        <ResMenuCard 
-                             
-                            name={menu?.card?.info?.name} 
-                            description={menu?.card?.info?.description} 
-                            rating={menu?.card?.info?.rating} 
-                            price={menu?.card?.info?.price} 
-                            imageId={menu?.card?.info?.imageId} 
-                        />
-                    </div>
-                ))}
-            </div> */}
+            <div>
+                {
+                    resMenu.map((c:any, idx:number) => (
+                        <div key={idx}>
+                            <ResMenuCard data={c} />
+                        </div>
+                    ))
+                }
+            </div>
             
         </div>
     )
