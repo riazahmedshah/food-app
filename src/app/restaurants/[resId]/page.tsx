@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { RES_MENU } from "@/app/utils/links";
-import ResMenuCard from "@/components/ResMenuCard";
+import {ResInfoCard} from "@/components/ResInfoCard";
+//import { ResMenuCard } from "@/components/ResMenuCard";
 import * as React from "react"
 
 
@@ -15,28 +16,57 @@ const RestaurantMenu =  ({params}:{params:Param}) => {
     
 
     React.useEffect(() => {
+        console.log(resMenu);
         const getData = async () => {
-            const response = await fetch(RES_MENU+resId);
-            const data = await response.json();
-            const apiResponse = data.data.cards[5].groupedCard.cardGroupMap.REGULAR.cards.slice(2)
-            const menuApi = data.data.cards[2].card.card;
-            // console.log("Res Info: ",data.data);
-            setResMenu(apiResponse);
-            setResInfo(menuApi);
+            try {
+                const response = await fetch(RES_MENU + resId);
+                const data = await response.json();
+
+                const menuApiResponse = 
+                    data.data.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.slice(2)
+                    ?.map((card: { card: { itemCards: any; }; })  => card?.card?.itemCards)
+                    .flat() || [];
+                
+                const resInfoApi = data.data.cards[2]?.card?.card || {};
+
+                setResMenu(menuApiResponse);
+                setResInfo(resInfoApi);
+
+                //console.log("Restaurant Info: ", resInfoApi);
+                console.log("Restaurant Menu Info: ", menuApiResponse);
+            } catch (error) {
+                console.error("Failed to fetch data:", error);
+            }
         }
         getData()
     },[resId]);
 
+    // const { name, description, ratings, price,imageId } = menu.itemCards.card.info;
+    // const{ rating } = ratings.aggregatedRating;
+
+    //if(!resMenu || !resInfo) return;
+
     return(
         <div className="mt-32 max-w-4xl mx-auto">
-            Id: {resId}
-            {
-                resMenu.map((resMenu:any, idx:number) => (
+            <div>
+                <ResInfoCard name={resInfo?.info?.name} cuisines={resInfo?.info?.cuisines} locality={resInfo?.info?.locality} city={resInfo?.info?.city} avgRatingString={resInfo?.info?.avgRatingString}/>
+            </div>
+
+            {/* Menu Items */}
+            {/* <div>
+                {resMenu.map((menu: any, idx: number) => (
                     <div key={idx}>
+                        <ResMenuCard 
+                             
+                            name={menu?.card?.info?.name} 
+                            description={menu?.card?.info?.description} 
+                            rating={menu?.card?.info?.rating} 
+                            price={menu?.card?.info?.price} 
+                            imageId={menu?.card?.info?.imageId} 
+                        />
                     </div>
-                ))
-            }
-            <ResMenuCard name={resInfo.info.name} cuisines={resInfo.info.cuisines} locality={resInfo.info.locality} city={resInfo.info.city} avgRatingString={resInfo.info.avgRatingString} />
+                ))}
+            </div> */}
             
         </div>
     )

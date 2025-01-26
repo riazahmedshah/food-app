@@ -1,37 +1,30 @@
-
-
+import { RES_MENU_IMG } from "@/app/utils/links";
 import { Star } from "lucide-react"
-
+import Image from "next/image";
 
 interface ResMenuProps{
     name:string;
-    cuisines:string[];
-    locality:string;
-    city:string;
-    avgRatingString:string;
+    description:string;
+    rating:string;
+    price:number;
+    imageId:string;
 }
 
-
-const ResMenuCard = ({avgRatingString, city, cuisines, locality, name,} : ResMenuProps) => {
-    // console.log("Res Data Info: ", location);
-
-  return (
-    <div className="">
-        <div className="pb-4 pt-2 border-b border-gray-400">
-            <div className="flex items-center justify-between">
-                <h2 className="text-3xl">{name}</h2>
-                <p className="bg-violet-700 text-white flex items-center gap-2 p-2 rounded-lg">{avgRatingString} <Star  fill="#ffffff" strokeWidth={0} className="size-4"/> </p>
+export const ResMenuCard = ({description, imageId, name, price, rating} : ResMenuProps) => {
+    return(
+        <div className="pt-10">
+            <div>
+                <h2>Title</h2>
+                <div>
+                    <h3>{name}</h3>
+                    <p>{price}</p>
+                    <p className="flex items-center text-sm text-green-900"><Star fill="green" strokeWidth={0}/>{rating}</p>
+                    <p>{description}</p>
+                </div>
             </div>
-            <div className="space-y-1 pt-1">
-                <p className="text-lg tracking-wide text-gray-500">{cuisines.join(", ")}</p>
-                <p className="text-md text-violet-600">{locality}, {city}</p>
+            <div>
+                <Image src={RES_MENU_IMG+imageId} alt="menu-image" height={50} width={50}/>
             </div>
         </div>
-        <div>
-            {/* menu items */}
-        </div>
-    </div>
-  )
+    )
 }
-
-export default ResMenuCard

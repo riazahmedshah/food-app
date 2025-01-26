@@ -29,7 +29,7 @@ const RestaurantPage = () => {
 
 
     return(
-        <div className="">
+        <div className="max-w-7xl mx-auto">
         <div className="relative mt-28 ">
             <div className="flex items-center gap-20 py-10">
                 <button 
