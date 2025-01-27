@@ -1,7 +1,6 @@
 import { ShoppingCart, User } from "lucide-react"
 
 
-
 export const Appbar = () => {
     return(
         <div className="">

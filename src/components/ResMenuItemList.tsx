@@ -1,23 +1,40 @@
 import { RES_MENU_IMG } from "@/app/utils/links";
 import { Star } from "lucide-react";
 import Image from "next/image";
+interface itemListProps{
+    data:[
+        {card:{
+            info:{
+                id:string;
+                name:string;
+                price:number;
+                ratings:{
+                    aggregatedRating:{
+                        rating:string;
+                    }
+                };
+                description:string;
+                imageId:string;
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export const ResMenuItemList = ({data}:any) => {
-    console.log("Items List: ",data)
+
+            }
+        }}
+    ]
+}
+
+export const ResMenuItemList = ({data} : itemListProps) => {
   return (
-    <div className="">  
+    <div>  
         {
-            data.map((item:any) => (
-                <div key={item.card?.info?.id} className="border-b border-black mb-4 px-1 py-4 flex justify-between bg-gray-100">
+            data.map((item) => (
+                <div key={item.card?.info?.name} className="border-b border-black mb-4 px-1 py-4 flex justify-between bg-gray-100">
                     <div className="max-w-[650px]">
-                        <div className="w-[250px]">
-                        <span className=" md:font-bold tracking-tight">{item.card?.info?.name}</span> - <span>{item.card?.info?.price ? item.card?.info?.price/100 : "100"} Rs.</span>
-                        
+                        <div className="md:w-full w-[250px]">
+                            <span className=" md:font-bold md:tracking-normal tracking-tight">{item.card?.info?.name}</span> - <span>{item.card?.info?.price ? item.card?.info?.price/100 : 100} Rs.</span>                       
                         </div>
                         <div className="inline-flex items-center text-white bg-green-700 gap-1 px-2 py-1 rounded-lg my-1">
-                            <Star fill="white" strokeWidth={0} />  <span>{item.card?.info?.ratings?.aggregatedRating?.rating}</span>
-                            
+                            <Star fill="white" strokeWidth={0} />  <span>{item?.card?.info?.ratings?.aggregatedRating?.rating}</span>
+                           
                         </div>
                         <p className="text-sm text-gray-600 pt-2">{item.card?.info?.description}</p>
                         </div>
@@ -37,7 +54,6 @@ export const ResMenuItemList = ({data}:any) => {
             ))
         }    
       
-    </div>
-        
+    </div>     
   );
 };

@@ -6,13 +6,11 @@ export default function RestaurantPageLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
       <div className="min-h-screen flex flex-col">
         <Appbar/>
         <main className="">
           {children}
         </main>
       </div>
-    </div>
   );
 }

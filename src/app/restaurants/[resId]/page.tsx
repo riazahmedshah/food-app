@@ -8,12 +8,19 @@ import * as React from "react"
 
 type Param = Promise<{resId:number}>
 
+interface resInfoProps{
+        name: string;
+        cuisines: string[];
+        locality:string;
+        city:string;
+        avgRatingString:string;
+}
+
 const RestaurantMenu =  ({params}:{params:Param}) => {
     const {resId} =  React.use(params);
-
-    const[resInfo, setResInfo] = React.useState<any>([])
+    const[resInfo, setResInfo] = React.useState<resInfoProps | null>(null)
     const[resMenu, setResMenu] = React.useState<any>([])
-    
+    const[showIndex,setShowIndex] = React.useState(0);
 
     React.useEffect(() => {
         const getData = async () => {
@@ -34,20 +41,23 @@ const RestaurantMenu =  ({params}:{params:Param}) => {
         getData()
     },[resId]);
 
-
-
+    if(!resInfo) return;
     return(
         <div className="mt-32 max-w-4xl mx-auto">
             <div>
-                <ResInfoCard name={resInfo.name} cuisines={resInfo.cuisines} locality={resInfo.locality} city={resInfo.city} avgRatingString={resInfo.avgRatingString}/>
+                <ResInfoCard name={resInfo?.name} cuisines={resInfo.cuisines} locality={resInfo.locality} city={resInfo.city} avgRatingString={resInfo.avgRatingString}/>
             </div>
-
             {/* Menu Items */}
             <div>
                 {
-                    resMenu.map((c:any, idx:number) => (
+                    resMenu.map((c:any, idx:any) => (
                         <div key={idx}>
-                            <ResMenuCard data={c} />
+                            <ResMenuCard 
+                            title={c?.card?.card?.title} 
+                            itemCards = {c.card?.card?.itemCards}
+                            showItems = {idx === showIndex ? true : false}
+                            setShowIndex = {() => setShowIndex(idx)}
+                            />
                         </div>
                     ))
                 }
