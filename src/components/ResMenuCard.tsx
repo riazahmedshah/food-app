@@ -1,29 +1,8 @@
 import { Minus, PlusIcon } from "lucide-react"
 import { ResMenuItemList } from "./ResMenuItemList";
-
-interface ResMenuProps{
-     title:string;
-     itemCards: [
-        {card:{
-            info:{
-                id:string;
-                name:string;
-                price:number;
-                ratings:{
-                    aggregatedRating:{
-                        rating:string;
-                    }
-                };
-                description:string;
-                imageId:string;
+import { ResMenuProps } from "@/types";
 
 
-            }
-        }}
-     ];
-     showItems:boolean;
-     setShowIndex: () => void
-}
 
 export const ResMenuCard = ({title, itemCards, showItems, setShowIndex}:ResMenuProps) => {
     const handleDiv = () => {

@@ -1,14 +1,9 @@
 import { RES_IMAGE_URL } from "@/app/utils/links";
+import { resDataProps } from "@/types";
 import { Star } from "lucide-react";
 import Image from "next/image";
 
-interface resDataProps{
-    cloudinaryImageId:string
-    name:string;
-    cuisines:string[];
-    avgRatingString:string;
-    areaName:string;
-}
+
 
 
 export const RestaurantCard = ({areaName,avgRatingString,cloudinaryImageId,cuisines,name} : resDataProps) => {

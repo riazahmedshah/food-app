@@ -1,21 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { RestaurantCard } from "@/components/RestaurantCard";
+import { resProps } from "@/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-// interface resProps{
-//     id:string,
-//     name:string,
-//     cloudinaryImageId:string,
-//     cuisines:string[],
-//     avgRatingString:string,
-//     areaName:string
-// }
+
 
 const RestaurantPage = () => {
-    const[restaurantData,setRestaurantData] = useState<any>([]);
-    const[filteredList, setFilteredList] = useState<any>([]);
+    const[restaurantData,setRestaurantData] = useState<resProps[] | []>([]);
+    const[filteredList, setFilteredList] = useState<resProps[] | []>([]);
     const[search,setSearch] = useState<string>("");
     //console.log("Serach ELemnt: ",search);
 
@@ -26,6 +19,7 @@ const RestaurantPage = () => {
         setRestaurantData(apiResponse);
         setFilteredList(apiResponse);
         //console.log(data.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+        //console.log(apiResponse);
     };
     
     useEffect(() => {
@@ -43,7 +37,7 @@ const RestaurantPage = () => {
             <div className="flex items-center gap-20 py-10">
                 <button 
                     onClick={() => {
-                        const filteredRestaurant = restaurantData.filter((res:any) => Number(res?.avgRatingString) > 4.3);
+                        const filteredRestaurant = restaurantData.filter((res) => Number(res?.info?.avgRatingString) > 4.3);
                         setFilteredList(filteredRestaurant);
                     }}
                     className="mx-4 px-4 py-2 border  rounded-lg bg-violet-800 text-white font-semibold">Top Rated Restaurant</button>
@@ -55,7 +49,7 @@ const RestaurantPage = () => {
                         className="shadow-lg py-3 px-5 rounded-l-full w-[500px] "/>
                     <button 
                         onClick={() => {
-                            const searchedRes = restaurantData.filter((res:any) => res?.name.toLowerCase().includes(search.toLowerCase()));
+                            const searchedRes = restaurantData.filter((res) => res?.info?.name.toLowerCase().includes(search.toLowerCase()));
                             setFilteredList(searchedRes);
                         }}
                         className="border-l-0 shadow-lg bg-violet-800 text-white py-[12px] px-5 rounded-r-full">search</button>
@@ -63,10 +57,10 @@ const RestaurantPage = () => {
             </div>
             <h1 className="text-4xl font-bold py-2 px-2">See All Restaurants</h1>
             <div className="grid md:grid-cols-4 grid-cols-2  gap-4">
-                {filteredList.map((res:any) => (
-                    <div key={res.id}>
-                        <Link href={`/restaurants/${res?.id}`}>
-                        <RestaurantCard  name={res?.name} cloudinaryImageId={res?.cloudinaryImageId} cuisines={res?.cuisines} avgRatingString={res?.avgRatingString} areaName={res?.areaName}/>
+                {filteredList.map((res) => (
+                    <div key={res.info?.id}>
+                        <Link href={`/restaurants/${res?.info?.id}`}>
+                        <RestaurantCard  name={res?.info?.name} cloudinaryImageId={res?.info?.cloudinaryImageId} cuisines={res?.info?.cuisines} avgRatingString={res?.info?.avgRatingString} areaName={res?.info?.areaName}/>
                         </Link>
                     </div>
                     

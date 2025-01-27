@@ -1,13 +1,8 @@
+import { ResInfoProps } from "@/types"
 import { Star } from "lucide-react"
 
 
-interface ResInfoProps{
-    name:string;
-    cuisines:string[];
-    locality:string;
-    city:string;
-    avgRatingString:string;
-}
+
 
 
 export const ResInfoCard = ({avgRatingString, city, cuisines, locality, name,} : ResInfoProps) => {
@@ -21,7 +16,7 @@ export const ResInfoCard = ({avgRatingString, city, cuisines, locality, name,} :
                 <p className="bg-violet-700 text-white flex items-center gap-2 p-2 rounded-lg">{avgRatingString} <Star  fill="#ffffff" strokeWidth={0} className="size-4"/> </p>
             </div>
             <div className="space-y-1 pt-1">
-                <p className="text-lg tracking-wide text-gray-500">{cuisines}</p>
+                <p className="text-lg tracking-wide text-gray-500">{cuisines.join(", ")}</p>
                 <p className="text-md text-violet-600">{locality}, {city}</p>
             </div>
         </div>

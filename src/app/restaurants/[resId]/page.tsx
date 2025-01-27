@@ -4,21 +4,16 @@ import { RES_MENU } from "@/app/utils/links";
 import { ResMenuCard } from "@/components/ResMenuCard";
 import {ResInfoCard} from "@/components/ResInfoCard";
 import * as React from "react"
+import { ResInfoProps } from "@/types";
 
 
 type Param = Promise<{resId:number}>
 
-interface resInfoProps{
-        name: string;
-        cuisines: string[];
-        locality:string;
-        city:string;
-        avgRatingString:string;
-}
+
 
 const RestaurantMenu =  ({params}:{params:Param}) => {
     const {resId} =  React.use(params);
-    const[resInfo, setResInfo] = React.useState<resInfoProps | null>(null)
+    const[resInfo, setResInfo] = React.useState<ResInfoProps | null>(null)
     const[resMenu, setResMenu] = React.useState<any>([])
     const[showIndex,setShowIndex] = React.useState(0);
 

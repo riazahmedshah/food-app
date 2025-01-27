@@ -1,26 +1,8 @@
 import { RES_MENU_IMG } from "@/app/utils/links";
+import { itemListProps } from "@/types";
 import { Star } from "lucide-react";
 import Image from "next/image";
-interface itemListProps{
-    data:[
-        {card:{
-            info:{
-                id:string;
-                name:string;
-                price:number;
-                ratings:{
-                    aggregatedRating:{
-                        rating:string;
-                    }
-                };
-                description:string;
-                imageId:string;
 
-
-            }
-        }}
-    ]
-}
 
 export const ResMenuItemList = ({data} : itemListProps) => {
   return (
@@ -44,7 +26,7 @@ export const ResMenuItemList = ({data} : itemListProps) => {
                                 alt="menu-image"
                                 height={50}
                                 width={200}
-                                className="object-cover items-end rounded-lg"
+                                className="object-cover items-end rounded-lg w-auto h-auto"
                             />
                             <div className="absolute -my-9 ml-16">
                                 <button className="bg-black text-white py-2 px-4 rounded-lg">Add +</button>
@@ -53,7 +35,6 @@ export const ResMenuItemList = ({data} : itemListProps) => {
                 </div>
             ))
         }    
-      
     </div>     
   );
 };
