@@ -77,3 +77,26 @@ export interface itemListProps{
         }}
     ]
 }
+
+
+export interface ItemInfo {
+    id: string;
+    name: string;
+    price: number;
+    ratings: {
+      aggregatedRating: {
+        rating: string;
+      };
+    };
+    description: string;
+    imageId: string;
+  }
+  
+  export interface ItemList {
+    card: {
+      info: ItemInfo;
+    };
+  }
+  
+  export type CartState = ItemList[];
+  

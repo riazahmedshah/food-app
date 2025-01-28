@@ -9,6 +9,7 @@ export const ResMenuItemList = ({data} : itemListProps) => {
     <div>  
         {
             data.map((item) => (
+                
                 <div key={item.card?.info?.name} className="border-b border-black mb-4 px-1 py-4 flex justify-between bg-gray-100">
                     <div className="max-w-[650px]">
                         <div className="md:w-full w-[250px]">
