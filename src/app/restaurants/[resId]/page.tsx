@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import { RES_MENU } from "@/app/utils/links";
+import { RES_MENU } from "@/utils/links";
 import { ResMenuCard } from "@/components/ResMenuCard";
 import {ResInfoCard} from "@/components/ResInfoCard";
 import * as React from "react"

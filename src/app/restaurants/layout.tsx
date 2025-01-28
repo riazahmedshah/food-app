@@ -1,4 +1,5 @@
-import {Appbar} from "@/components/Appbar"
+
+import  ResHeader  from "@/components/ResHeader";
 import StoreProvider from "../StoreProvider";
 
 export default function RestaurantPageLayout({
@@ -6,10 +7,12 @@ export default function RestaurantPageLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  
   return (
     <StoreProvider>
       <div className="min-h-screen flex flex-col">
-        <Appbar/>
+        <ResHeader/>
         <main className="">
           {children}
         </main>

@@ -1,4 +1,4 @@
-import { RES_IMAGE_URL } from "@/app/utils/links";
+import { RES_IMAGE_URL } from "@/utils/links";
 import { resDataProps } from "@/types";
 import { Star } from "lucide-react";
 import Image from "next/image";

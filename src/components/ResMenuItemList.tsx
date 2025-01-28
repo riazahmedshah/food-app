@@ -1,10 +1,24 @@
-import { RES_MENU_IMG } from "@/app/utils/links";
-import { itemListProps } from "@/types";
+"use client"
+import { RES_MENU_IMG } from "@/utils/links";
+import { addItemToCart } from "@/lib/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hook";
+import { ItemList, itemListProps } from "@/types";
 import { Star } from "lucide-react";
 import Image from "next/image";
 
 
 export const ResMenuItemList = ({data} : itemListProps) => {
+
+    const dispatch = useAppDispatch()
+
+    const handleAddItem = (item: ItemList) => {
+        dispatch(addItemToCart(item))
+        console.log("Clicked")
+    }
+
+    const item = useAppSelector((store) => store.cartReducer);
+    console.log("ItemData: ", item);
+
   return (
     <div>  
         {
@@ -30,7 +44,9 @@ export const ResMenuItemList = ({data} : itemListProps) => {
                                 className="object-cover items-end rounded-lg w-auto h-auto"
                             />
                             <div className="absolute -my-9 ml-16">
-                                <button className="bg-black text-white py-2 px-4 rounded-lg">Add +</button>
+                                <button 
+                                    onClick={() => handleAddItem(item)}
+                                    className="bg-black text-white py-2 px-4 rounded-lg">Add +</button>
                             </div>
                         </div>
                 </div>
