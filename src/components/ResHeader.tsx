@@ -9,7 +9,6 @@ const ResHeader = () => {
           title="FoodZ'ee"
           cartCount={item.length}
           userName="John Doe"
-          cartPage={true}
           />
     )
 }
